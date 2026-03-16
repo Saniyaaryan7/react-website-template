@@ -6,6 +6,9 @@ import {BrowserRouter , Routes, Route} from 'react-router-dom'
 import Navbar from './Components/Webpage/Navbar/Navbar'
 import Footer from './Components/Webpage/Footer/Footer'
 
+import Loader from './Components/common/Loader'
+import Error404 from './pages/Error404'
+
 const Home = React.lazy(() => import( "./pages/Home"));
 const About = React.lazy(() => import( "./pages/About"));
 const Contact = React.lazy(() => import( "./pages/Contact"));
@@ -26,13 +29,17 @@ function App() {
       <BrowserRouter>
       <Navbar/> 
 
-<Suspense fallback={<h1>Loading...</h1>}>
+<Suspense fallback={<Loader/>}>
 
       <Routes>
         <Route path='/' element={<Home />}/>
         <Route path='/About' element={<About />}/>
         <Route path='/Services' element={<Services />}/>
         <Route path='/Contact' element={<Contact />}/>
+
+        {/* 404 Page */}
+        <Route path='*' element={<Error404 />}/>
+
       </Routes>
 </Suspense>
       <Footer/>   
